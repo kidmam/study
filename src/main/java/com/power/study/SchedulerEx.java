@@ -4,6 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
+import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Slf4j
 public class SchedulerEx {
@@ -14,6 +18,7 @@ public class SchedulerEx {
             sub.onSubscribe(new Subscription() {
                 @Override
                 public void request(long l) {
+                    log.debug("request()");
                     sub.onNext(1);
                     sub.onNext(2);
                     sub.onNext(3);
@@ -29,8 +34,61 @@ public class SchedulerEx {
             });
 
         };
+        //pub
 
-        pub.subscribe(new Subscriber<Integer>() {
+        Publisher<Integer> subOnPub = sub -> {
+            //pub.subscribe(sub);
+            ExecutorService es = Executors.newSingleThreadExecutor( new CustomizableThreadFactory() {
+                @Override
+                public String getThreadNamePrefix() {
+                    return "subOn-";
+                }
+            });
+
+            /*es.execute(new Runnable() {
+                @Override
+                public void run() {
+                    pub.subscribe(sub);
+                }
+            });*/
+
+            es.execute( () -> pub.subscribe(sub));
+        };
+
+        Publisher<Integer> pubOnsub = sub -> {
+            subOnPub.subscribe(new Subscriber<Integer>() {
+                ExecutorService es = Executors.newSingleThreadExecutor( new CustomizableThreadFactory() {
+                    @Override
+                    public String getThreadNamePrefix() {
+                        return "pubOn-";
+                    }
+                });
+
+                @Override
+                public void onSubscribe(Subscription s) {
+                    sub.onSubscribe(s);
+                }
+
+                @Override
+                public void onNext(Integer integer) {
+                    es.execute( () -> sub.onNext(integer) );
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+                    es.execute( () ->sub.onError(throwable) );
+                }
+
+                @Override
+                public void onComplete() {
+                    es.execute( () ->sub.onComplete() );
+                }
+            });
+
+        };
+
+        //sub
+        pubOnsub.subscribe(new Subscriber<Integer>() {
             @Override
             public void onSubscribe(Subscription s) {
                 log.debug("onSubscribe");
@@ -55,5 +113,7 @@ public class SchedulerEx {
 
             }
         });
+
+        System.out.println("Exit");
     }
 }
