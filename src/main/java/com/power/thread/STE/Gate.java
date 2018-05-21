@@ -1,6 +1,8 @@
 package com.power.thread.STE;
 //Single Threaded Execution: 하나의 쓰레드에 의한 실행
 
+import sun.awt.Mutex;
+
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Gate {
@@ -9,6 +11,8 @@ public class Gate {
     private String address = "NoWhere";
 
     //ReentrantLock lock = new ReentrantLock();
+
+    //private final Mutex mutex = new Mutex();
 
     public synchronized void pass(String name, String address) {
         //synchronized (this) {
