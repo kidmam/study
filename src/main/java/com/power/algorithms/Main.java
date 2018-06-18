@@ -14,8 +14,19 @@ public class Main {
             return n * Fact( n - 1 );
     }
 
+    int Print(int n) {
+        if ( n == 0 )
+            return 0;
+        else {
+            System.out.println(n);
+            return Print( n - 1 );
+        }
+    }
+
     public static void main(String[] args) {
         Main m = new Main();
         log.info(Integer.toString(m.Fact(5)));
+
+        m.Print(10);
     }
 }
