@@ -25,7 +25,7 @@ public class Main {
 
     public static void main(String[] args) {
         Main m = new Main();
-        log.info(Integer.toString(m.Fact(5)));
+        log.info(Integer.toString(m.Fact(4)));
 
         m.Print(10);
     }
