@@ -23,10 +23,22 @@ public class Main {
         }
     }
 
+    static void TowerOfHanoi(int n, char frompeg, char topeg, char auxpeg) {
+        if ( n == 1 ) {
+            System.out.println("Move disk 1 from peg" + frompeg + " to peg " + topeg);
+            return;
+        }
+        TowerOfHanoi(n-1, frompeg, auxpeg, topeg);
+        System.out.println("Move disk 1 from peg" + frompeg + " to peg " + topeg);
+        TowerOfHanoi(n-1, auxpeg, topeg, frompeg);
+    }
+
     public static void main(String[] args) {
         Main m = new Main();
         log.info(Integer.toString(m.Fact(4)));
 
         m.Print(10);
+
+        TowerOfHanoi(10, 'A', 'B', 'C');
     }
 }
