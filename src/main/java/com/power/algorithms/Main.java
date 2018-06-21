@@ -33,6 +33,7 @@ public class Main {
         TowerOfHanoi(n-1, auxpeg, topeg, frompeg);
     }
 
+
     public static void main(String[] args) {
         Main m = new Main();
         log.info(Integer.toString(m.Fact(4)));
