@@ -41,5 +41,6 @@ public class Main {
         m.Print(10);
 
         TowerOfHanoi(10, 'A', 'B', 'C');
+
     }
 }
