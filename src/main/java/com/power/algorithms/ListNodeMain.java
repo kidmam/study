@@ -37,7 +37,14 @@ public class ListNodeMain {
         return headNode;
     }
 
-
+    void DeleteLinkedList(ListNode head) {
+        ListNode auxilaryNode, iterator = head;
+        while (iterator != null) {
+            auxilaryNode = iterator.getNext();
+            iterator = null;
+            iterator = auxilaryNode;
+        }
+    }
 
     public static void main(String[] args) {
 
