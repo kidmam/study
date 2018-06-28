@@ -43,6 +43,7 @@ public class ListNodeMain {
         return headNode;
     }
 
+
     void DeleteLinkedList(ListNode head) {
         ListNode auxilaryNode, iterator = head;
         while (iterator != null) {
