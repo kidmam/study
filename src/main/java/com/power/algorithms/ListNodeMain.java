@@ -37,6 +37,12 @@ public class ListNodeMain {
         return headNode;
     }
 
+    ListNode DeleteNodeFromLinkedList(ListNode headNode, int position) {
+        int size = ListLength(headNode);
+
+        return headNode;
+    }
+
     void DeleteLinkedList(ListNode head) {
         ListNode auxilaryNode, iterator = head;
         while (iterator != null) {
