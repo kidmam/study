@@ -1,5 +1,7 @@
 package com.power.algorithms;
 
+import java.util.List;
+
 public class ListNodeMain {
 
     public static int ListLength(ListNode headNode) {
@@ -39,7 +41,25 @@ public class ListNodeMain {
 
     ListNode DeleteNodeFromLinkedList(ListNode headNode, int position) {
         int size = ListLength(headNode);
-
+        if (position > size || position < 1) {
+            System.out.println("Position of node to delete is invalid");
+            return headNode;
+        }
+        if (position == 1) {
+            ListNode currentNode = headNode.getNext();
+            headNode = null;
+            return currentNode;
+        } else {
+            ListNode previousNode = headNode;
+            int count = 1;
+            while (count < position - 1) {
+                previousNode = previousNode.getNext();
+                count++;
+            }
+            ListNode currentNode = previousNode.getNext();
+            previousNode.setNext(currentNode.getNext());
+            currentNode = null;
+        }
         return headNode;
     }
 
