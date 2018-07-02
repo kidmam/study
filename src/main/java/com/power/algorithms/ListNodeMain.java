@@ -1,5 +1,6 @@
 package com.power.algorithms;
 
+//
 public class ListNodeMain {
 
     public static int ListLength(ListNode headNode) {
