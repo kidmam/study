@@ -1,7 +1,5 @@
 package com.power.algorithms;
 
-import java.util.List;
-
 public class ListNodeMain {
 
     public static int ListLength(ListNode headNode) {
