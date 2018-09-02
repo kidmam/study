@@ -18,7 +18,7 @@ public class ListNodeMain {
         }
         int size = ListLength(headNode);
         if (position > size + 1 || position < 1) {
-            System.out.println("Position of node to insert is invalid. The valid inputs are 1 to " + (size + 1));
+            System.out.println("Position of node to insert is invalid. The valid inputs are 11 to " + (size + 1));
         }
         if (position == 1) {
             nodeToInsert.setNext(headNode);
